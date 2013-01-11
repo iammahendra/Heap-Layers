@@ -75,6 +75,10 @@ namespace HL {
     }
 
     inline static size_t getSize (const void * ptr) {
+      if(getHeader(ptr)->_magic != 0xcafebabe) {
+        return 0;
+      }
+
       assert (getHeader(ptr)->_magic == 0xcafebabe);
       size_t size = getHeader(ptr)->_sz;
       return size;
